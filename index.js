@@ -16,9 +16,9 @@ const CRED = require('./secret.js');
     }
 
 
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({ headless: false, defaultViewport: null, });
     const page = await browser.newPage();
-    await page.setViewport({ width: 2000, height: 1000 })
+    // await page.setViewport({ width: 3000, height: 1000 })
     await page.goto('https://www.messenger.com/', { waitUntil: 'domcontentloaded' });
 
     await page.waitForSelector("#email");
@@ -51,7 +51,9 @@ const CRED = require('./secret.js');
         console.log(resultFullName)
     }
 
-    //await page.evaluate();
+    page.click(contentSelector);
+
+    await sleep(5000);
 
     await page.screenshot({ path: 'example.png' });
 
