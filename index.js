@@ -18,19 +18,33 @@ const CRED = require('./secret.js');
 
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
-    await page.goto('https://facebook.com', { waitUntil: 'domcontentloaded' });
+    await page.setViewport({ width: 2000, height: 1000 })
+    await page.goto('https://www.messenger.com/', { waitUntil: 'domcontentloaded' });
 
     await page.waitForSelector("#email");
+    await sleep(500);
     // username
     await page.type("#email", CRED.username)
+
+    await sleep(500);
     // password
     await page.type("#pass", CRED.password)
 
-    await sleep(500);
+
 
     await page.click("#loginbutton")
+    await page.waitForSelector("#js_u > div > div > div._1nq2._7vup > span._5iwm._6-_b._150g._58ah > label > input");
+    await sleep(1000);
 
-    await sleep(5000);
+    await page.type("#js_u > div > div > div._1nq2._7vup > span._5iwm._6-_b._150g._58ah > label > input", CRED.victimFullName)
+    await sleep(1000);
+
+    var contentSelector = "#js_u > div > div > div._1nq2._7vup > span._5iwm._6-_b._5iwn._150g._58ah > div > div > div:nth-child(2) > ul > li > a > div > div:nth-child(2) > div > div"
+    await page.waitForSelector(contentSelector, { timeout: 0 });
+    var test = await page.$eval(contentSelector, contentSelector => contentSelector.innerText);
+    console.log(test)
+    //await page.evaluate();
+
     await page.screenshot({ path: 'example.png' });
 
 
