@@ -41,8 +41,16 @@ const CRED = require('./secret.js');
 
     var contentSelector = "#js_u > div > div > div._1nq2._7vup > span._5iwm._6-_b._5iwn._150g._58ah > div > div > div:nth-child(2) > ul > li > a > div > div:nth-child(2) > div > div"
     await page.waitForSelector(contentSelector, { timeout: 0 });
-    var test = await page.$eval(contentSelector, contentSelector => contentSelector.innerText);
-    console.log(test)
+    const resultFullName = await page.$eval(contentSelector, contentSelector => contentSelector.innerText);
+    if (resultFullName.toLowerCase() !== CRED.victimFullName.toLowerCase()) {
+        console.log(resultFullName)
+        console.log("Result name does not equal victim name :(")
+        browser.close();
+        return;
+    } else {
+        console.log(resultFullName)
+    }
+
     //await page.evaluate();
 
     await page.screenshot({ path: 'example.png' });
