@@ -55,8 +55,11 @@ const CRED = require('./secret.js');
 
     await sleep(5000);
 
-    //await page.type(null, 'World', { delay: 100 }); // Types slower, like a user
-    //await page.keyboard.type('Puppeteer');
+
+    //await fs.open("script.txt","r");
+
+    var contents = fs.readFileSync('script.txt', 'utf8');
+    console.log(contents);
     await page.keyboard.type("Testing", { delay: 50 })
     await sleep(3000);
     await page.screenshot({ path: 'example.png' });
