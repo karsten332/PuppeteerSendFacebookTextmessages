@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const fs = require('fs');
+const lineReader = require('line-reader');
 const CRED = require('./secret.js');
 
 
@@ -56,11 +56,17 @@ const CRED = require('./secret.js');
     await sleep(5000);
 
 
-    //await fs.open("script.txt","r");
 
-    var contents = fs.readFileSync('script.txt', 'utf8');
-    console.log(contents);
-    await page.keyboard.type("Testing", { delay: 50 })
+
+    lineReader.eachLine("script.txt", function (line) {
+
+        page.keyboard.type(line.toString(), { delay: 50 })
+        //page.keyboard.press('Enter');
+        //console.log(line)
+    });
+
+
+    //await page.keyboard.type("Testing", { delay: 50 })
     await sleep(3000);
     await page.screenshot({ path: 'example.png' });
 
