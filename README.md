@@ -8,5 +8,8 @@ Script for using Puppeteer to log into Messenger and sending a text file line by
 
 Must have Node installed
 
-1. Yarn install / npm install
+1. Yarn install / npm install.
 2. go to secret.js and fill in username, password and victim name.
+3. Put text in script.txt.
+4. In console type node index.js.
+5. Enjoy :) 
