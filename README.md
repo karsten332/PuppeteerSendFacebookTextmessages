@@ -13,3 +13,10 @@ Must have Node installed
 3. Put text in script.txt.
 4. In console type node index.js.
 5. Enjoy :) 
+
+
+## Known issues
+ - selectors can be changed by facebook anytime that will make the script not work
+ - script sometimes fail to click into victim texx field, but that can be fixed by clicking on the text field before it stars sending lines of text. 
+
+ 

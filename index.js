@@ -42,7 +42,7 @@ const fs = require('fs');
         browser.close();
         return;
     } else {
-        console.log(resultFullName)
+        console.log("Success")
     }
 
     page.click(contentSelector);
