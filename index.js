@@ -53,18 +53,22 @@ const fs = require('fs');
 
     await sleep(5000);
 
-    var text = []; // scripttest
+    var scriptText = []; // scripttest
 
 
     fs.readFileSync('script.txt', 'utf-8').split(/\r?\n/).forEach(async function (line) {
-        //console.log(line);
-        text.push(line)
-        //await page.keyboard.type(line)
-    });
-    console.log(text.length);
-    console.log(text[1]);
+        scriptText.push(line)
 
-    //await page.keyboard.type("Testing", { delay: 50 })
+    });
+
+
+    await sleep(5000)
+
+    for (line of scriptText) {
+        await sleep(50);
+        await page.keyboard.type(line, { delay: 25 })
+        await page.keyboard.press('Enter');
+    }
     await sleep(3000);
     await page.screenshot({ path: 'example.png' });
 
