@@ -1,10 +1,7 @@
 const puppeteer = require('puppeteer');
-const lineReader = require('line-reader');
 const CRED = require('./secret.js');
 const fs = require('fs');
 (async () => {
-    //console.log(CRED.password)
-
     const sleep = async (ms) => {
         return new Promise((res, rej) => {
             setTimeout(() => {
@@ -16,7 +13,6 @@ const fs = require('fs');
 
     const browser = await puppeteer.launch({ headless: false, defaultViewport: null, });
     const page = await browser.newPage();
-    // await page.setViewport({ width: 3000, height: 1000 })
     await page.goto('https://www.messenger.com/', { waitUntil: 'domcontentloaded' });
 
     await page.waitForSelector("#email");
@@ -53,7 +49,7 @@ const fs = require('fs');
 
     await sleep(5000);
 
-    var scriptText = []; // scripttest
+    var scriptText = [];
 
 
     fs.readFileSync('script.txt', 'utf-8').split(/\r?\n/).forEach(async function (line) {
@@ -69,9 +65,5 @@ const fs = require('fs');
         await page.keyboard.type(line, { delay: 25 })
         await page.keyboard.press('Enter');
     }
-    await sleep(3000);
-    await page.screenshot({ path: 'example.png' });
-
-
     await browser.close();
 })();
